@@ -2,20 +2,16 @@
 using namespace std;
 
 int main() {
-    int n;
-    cin >> n;
-
-    vector<string> vec(n);
+    int n, m;
+    int p;
+    int sum = 0;
+    cin >> n >> m;
 
     for (int i = 0; i < n; i++) {
-        cin >> vec.at(i);
+        cin >> p;
+        sum += p;
     }
-
-    int x;
-    string y;
-    cin >> x >> y;
-
-    if (vec.at(x - 1) == y) {
+    if (sum <= m) {
         cout << "Yes" << endl;
     }
     else {
