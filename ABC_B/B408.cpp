@@ -12,19 +12,24 @@ int main() {
 
     sort(a.begin(), a.end());
     int tmp = 0;
-    for (int i = 0; i < (int)a.size() - 1; i++) {
+    vector<int> ans;
+    for (int i = 0; i < (int)a.size(); i++) {
         tmp = a.at(i);
-        while (1) {
-
-        }
-        if (a.at(i + 1) == tmp) {
-            a.erase(a.begin() + i);
+        if (count(ans.begin(), ans.end(), tmp) == 0) {
+            ans.push_back(tmp);
         }
     }
 
-    cout << (int)a.size() << endl;
-    for (int i = 0; i < (int)a.size(); i++) {
-        cout << a.at(i) << " ";
+    cout << (int)ans.size() << endl;
+    for (int i = 0; i < (int)ans.size(); i++) {
+        cout << ans.at(i) << " ";
     }
     cout << endl;
 }
+
+// 【改善版】ソート済みなので ans.back() と比較するだけでいい。count 不要で O(1)
+// for (int i = 0; i < (int)a.size(); i++) {
+//     if (ans.empty() || a.at(i) != ans.back()) {
+//         ans.push_back(a.at(i));
+//     }
+// }
