@@ -1,53 +1,47 @@
-// 知識足りなかった気がする
-// ソートがわからんかったわ
-
-/*
-
 #include <bits/stdc++.h>
 using namespace std;
 
-int main()
-{
-    int N, K, M;
-    cin >> N >> K >> M;
+int main() {
+    int n, k, m;
+    cin >> n >> k >> m;
 
-    vector<vector<int>> data(N, vector<int>(2));
-    for (int i = 0; i < N; i++)
-    {
-        cin >> data[i][0] >> data[i][1];
+    vector<vector<int>> vc(n, vector<int>(2));
+    for (int i = 0; i < n; i++) {
+        cin >> vc.at(i).at(1) >> vc.at(i).at(0);
     }
+    sort(vc.rbegin(), vc.rend());
 
-    int sum = 0;
-    int min = 0;
-    int count = 0;
-
-    vector<int> M_data;
-
-    for (int i = 0; i < K; i++)
-    {
-        if (count < 2)
-        {
-            sum += data[i][1];
-            if (data[i][1] < min)
-            {
-                min = data[i][1];
-            }
-            count++;
-            M_data.push_back(data[i][0]);
+    long long ans = 0;
+    int cnt = 0;
+    vector<int> color(n);
+    for (int i = 0; i < n; i++) {
+        if (color.at(vc.at(i).at(1) - 1) == 0) {
+            ans += vc.at(i).at(0);
+            color.at(vc.at(i).at(1) - 1)++;
+            vc.at(i).at(0) = 0;
+            cnt++;
         }
-        else
-        {
-            if (min < data[i][1])
-            {
-                sum -= min;
-                sum += data[i][1];
-                min = data[i][1];
-                M_data.push_back(data[i][0]);
-            }
+        if (cnt == m) {
+            break;
         }
     }
 
-    if
+    if (k > m) {
+        for (int i = 1; i < n; i++) {
+            if (vc.at(i).at(0) != 0) {
+                ans += vc.at(i).at(0);
+                vc.at(i).at(0) = 0;
+                cnt++;
+            }
+            if (cnt == k) {
+                break;
+            }
+        }
+    }
+    cout << ans << endl;
 }
 
-*/
+// 改善点: vector<vector<int>> の2要素固定なら pair<int,int> の方がスッキリ
+// vector<pair<int,int>> vc(n); // {value, color}
+// cin >> vc.at(i).second >> vc.at(i).first;
+// sort(vc.rbegin(), vc.rend()); // first(value)の降順でそのまま降順ソートできる

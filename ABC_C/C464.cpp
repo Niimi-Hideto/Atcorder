@@ -5,46 +5,38 @@ int main() {
     int n, m;
     cin >> n >> m;
 
-    vector<vector<int>> color(n, vector<int>(4));
+    // cnt[色] = 今その色の鳥が何羽いるか
+    vector<int> cnt(n + 1, 0);
+    int distinct = 0;
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < 4; j++) {
-            if (j < 3) {
-                cin >> color.at(i).at(j);
-            }
-            else {
-                color.at(i).at(3) = 0;
-            }
-        }
+    // events[日付] に {色, +1か-1} を積む
+    vector<vector<pair<int, int>>> events(m + 1);
+
+    for (int i = 1; i <= n; i++) {
+        int a, d, b;
+        cin >> a >> d >> b;
+
+        // 初期: 色 A を +1
+        cnt.at(a)++;
+        if (cnt.at(a) == 1) distinct++;
+
+        // D 日目に色 A を -1、色 B を +1
+        events.at(d).push_back({a, -1});
+        events.at(d).push_back({b, +1});
     }
 
-    vector<int> ans(n);
-    for (int i = 0; i < n; i++) {
-        ans.at(i) = color.at(i).at(0);
-    }
-
-    for (int i = 0; i < m; i++) {
-        int count = 1;
-
-        for (int k = 0; k < n; k++) {
-            if (color.at(k).at(1) - 1 == i) {
-                color.at(k).at(0) = color.at(k).at(2);
-                color.at(i).at(3) += 1;
-                ans.at(k) = color.at(k).at(2);
+    for (int j = 1; j <= m; j++) {
+        for (auto ev : events.at(j)) {
+            int color = ev.first;
+            int delta = ev.second;
+            if (delta == +1) {
+                cnt.at(color)++;
+                if (cnt.at(color) == 1) distinct++;
+            } else {
+                cnt.at(color)--;
+                if (cnt.at(color) == 0) distinct--;
             }
         }
-
-        vector<int> tmp(n);
-        for (int q = 0; q < n; q++) {
-            tmp.at(q) = ans.at(q);
-        }
-
-        sort(tmp.begin(), tmp.end());
-        for (int j = 0; j < n - 1; j++) {
-            if (tmp.at(j) != tmp.at(j + 1)) {
-                count++;
-            }
-        }
-        cout << count << endl;
+        cout << distinct << "\n";
     }
 }

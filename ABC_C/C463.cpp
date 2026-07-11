@@ -5,33 +5,24 @@ int main() {
     int n;
     cin >> n;
 
-    vector<vector<int>> taka(n, vector<int>(2));
+    vector<int> h(n), l(n);
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < 2; j++) {
-            cin >> taka.at(i).at(j);
-            if (j == 1) {
-                taka.at(i).at(1) *= 60;
-            }
-        }
+        cin >> h.at(i) >> l.at(i);
+    }
+    vector<int> suf_max(n);
+    suf_max.at(n - 1) = h.at(n - 1);
+    for (int i = n - 2; i >= 0; i--) {
+        suf_max.at(i) = max(suf_max.at(i + 1), h.at(i));
     }
 
     int q;
     cin >> q;
-    int tmp = 0;
+    for (int i = 0; i < q; i++) {
+        int t;
+        cin >> t;
 
-    for (int k = 0; k < q; k++) {
-        cin >> tmp;
-        tmp = (tmp * 60) + 30;
+        int k = upper_bound(l.begin(), l.end(), t) - l.begin();
 
-        vector<int> vec(n);
-
-        for (int i = 0; i < n; i++) {
-            if (taka.at(i).at(1) > tmp) {
-                vec.at(i) = taka.at(i).at(0);
-            }
-        }
-        int idx;
-        idx = max_element(vec.begin(), vec.end()) - vec.begin();
-        cout << vec.at(max_element(vec.begin(), vec.end()) - vec.begin()) << endl;
+        cout << suf_max.at(k) << endl;
     }
 }
