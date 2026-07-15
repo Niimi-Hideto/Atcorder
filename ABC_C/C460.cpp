@@ -18,23 +18,16 @@ int main() {
 
 
     int ans = 0;
-    vector<int> use(m, 0);
+    int j = 0;  // ネタのポインタ（外に出して持ち回す）
+
     for (int i = 0; i < n; i++) {
-        int k = upper_bound(b.begin(), b.end(), (a.at(i) * 2)) - b.begin() - 1;
-        if (use.at(k) == 0) {
-            use.at(k)++;
+        // 現在の最小ネタが今のシャリに乗せられるならマッチ
+        if (j < m && b.at(j) <= 2 * a.at(i)) {
             ans++;
+            j++;  // このネタは使った → 次のネタへ
         }
-        else {
-            while (k > 0) {
-                k--;
-                if (use.at(k) == 0) {
-                    use.at(k)++;
-                    ans++;
-                    break;
-                }
-            }
-        }
+        // 乗せられなければ b[j] 以降は全部重すぎる（昇順なので）
+        // → このシャリは詰んでいる → i++ で次のシャリへ（forが自動でやる）
     }
     cout << ans << endl;
 }
