@@ -5,11 +5,10 @@ int main() {
     int n, m;
     cin >> n >> m;
 
-    vector<int> a(n);
+    vector<int> a(n), b(m);
     for (int i = 0; i < n; i++) {
         cin >> a.at(i);
     }
-    vector<int> b(m);
     for (int i = 0; i < m; i++) {
         cin >> b.at(i);
     }
@@ -19,13 +18,15 @@ int main() {
 
     int ans = 0;
     int j = 0;
-
-    for (int i = 0; i < n; i++) {
-        if (j < m && b.at(j) <= 2 * a.at(i)) {
-            ans++;
+    for (int i = 0; i < m; i++) {
+        while (j < n) {
+            if (a.at(j) * 2 >= b.at(i)) {
+                ans++;
+                j++;
+                break;
+            }
             j++;
         }
     }
-
     cout << ans << endl;
 }
