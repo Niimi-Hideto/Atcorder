@@ -67,3 +67,7 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+# local editor/tool settings (contains local paths, not for sharing)
+.claude/settings.local.json
+.DS_Store
