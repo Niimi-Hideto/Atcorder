@@ -1,3 +1,5 @@
+//TLEして終了．D問題の精進が始まったらまた解いてみる．
+
 #include <bits/stdc++.h>
 using namespace std;
 
