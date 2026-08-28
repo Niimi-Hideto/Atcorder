@@ -5,31 +5,32 @@ int main() {
     int n, m;
     cin >> n >> m;
 
-    vector<vector<int>> graph(n + 1);
+    queue<int> q;
+    vector<vector<int>> ab(n + 1);
+    vector<bool> visited(n + 1);
+    visited.at(1) = true;
+    int ans = 1;
     for (int i = 0; i < m; i++) {
         int a, b;
         cin >> a >> b;
-        graph.at(a).push_back(b);
+        if (a == 1) {
+            q.push(b);
+        }
+        ab.at(a).push_back(b);
     }
 
-    vector<bool> visited(n + 1, false);
-    queue<int> que;
-    visited.at(1) = true;
-    que.push(1);
-    int cnt = 1;
+    while (q.size() > 0) {
+        int tmp = q.front();
+        q.pop();
 
-    while (!que.empty()) {
-        int cur = que.front();
-        que.pop();
+        if (visited.at(tmp) == false) {
+            visited.at(tmp) = true;
+            ans++;
 
-        for (int next : graph.at(cur)) {
-            if (!visited.at(next)) {
-                visited.at(next) = true;
-                cnt++;
-                que.push(next);
+            for (int item : ab.at(tmp)) {
+                q.push(item);
             }
         }
     }
-
-    cout << cnt << endl;
+    cout << ans << endl;
 }
