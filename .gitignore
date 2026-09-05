@@ -41,6 +41,8 @@
 
 # AtCoder compiled binaries (拡張子なし: a459, b471, c471, d471, e/f/g... など)
 [abcdefg][0-9][0-9][0-9]
+# 復習で作り直した版のバイナリ (c449_2, c447_3 など、末尾に _何か が付くもの)
+[abcdefg][0-9][0-9][0-9]_*
 
 # Build directories
 build/
