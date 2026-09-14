@@ -73,6 +73,9 @@ vcpkg_installed/
 Testing/
 .cache/
 
+# 書籍・資料のPDF (著作物なのでリポジトリには上げない)
+*.pdf
+
 # local editor/tool settings (contains local paths, not for sharing)
 .claude/settings.local.json
 .DS_Store
