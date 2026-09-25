@@ -46,6 +46,9 @@
 # 鉄則本の compiled binaries (番号が2桁: a01, b14, c20 など)
 [abc][0-9][0-9]
 [abc][0-9][0-9]_*
+# Mac は大文字小文字を区別しないので、上の *_* パターンに B474_2.cpp などのソースも
+# 引っかかってしまう。ソース（.cpp）は必ず追跡する
+!*.cpp
 
 # Build directories
 build/
