@@ -85,3 +85,6 @@ Testing/
 # local editor/tool settings (contains local paths, not for sharing)
 .claude/settings.local.json
 .DS_Store
+
+# atcoder-toolkit (actk) のサンプルキャッシュとビルド成果物
+.actk/
