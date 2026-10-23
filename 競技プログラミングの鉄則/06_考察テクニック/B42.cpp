@@ -14,7 +14,7 @@ int main() {
     // 「表を + か − か」「裏を + か − か」の 4 通りの (±表の総和) + (±裏の総和) のうち最大と同じ
     // 符号を 1 つ固定すると、カード i の得点 (sa × A_i + sb × B_i) を足すだけになり、
     // カード同士は影響しないので、得点がプラスのカードを全部選べば最大
-    vector<int> sign = {1, -1};
+    vector<int> sign = { 1, -1 };
     long long ans = 0;
     for (int sa : sign) {
         for (int sb : sign) {
